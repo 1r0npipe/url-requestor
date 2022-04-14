@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-requestor-deployment
+  labels:
+    app: url-requestor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: url-requestor
+  template:
+    metadata:
+      labels:
+        app: url-requestor
+    spec:
+      containers:
+      - name: myImage 
+        image: myImage:latest
+        ports:
+        - containerPort: 8080
