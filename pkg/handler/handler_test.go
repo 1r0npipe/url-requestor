@@ -11,7 +11,7 @@ import (
 
 )
 
-func TestURLRequestsHandler(t *testing.T) {
+func TestDummyServer(t *testing.T) {
 	testBody := []byte("{\"data\":[{\"url\":\"www.example.com/abc1\",\"views\":1000,\"relevanceScore\":0.1},{\"url\":\"www.example.com/abc2\",\"views\":2000,\"relevanceScore\":0.2}]}")
 	testServer := httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		res.WriteHeader(http.StatusOK)
