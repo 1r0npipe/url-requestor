@@ -1,7 +1,11 @@
 package model
 
 type Data struct {
-	URL            *string
-	Views          *int
-	RelevanceScore *float32
+	URL            string  `json:"url"`
+	Views          int     `json:"views"`
+	RelevanceScore float64 `json:"relevanceScore"`
+}
+
+type BodyGenerated struct {
+	Data []Data `json:"data"`
 }

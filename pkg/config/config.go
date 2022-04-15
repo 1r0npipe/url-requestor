@@ -13,7 +13,8 @@ type Config struct {
 		Timeout  int     `yaml:"timeout"`
 		LogLevel *string `yaml:"logLevel"`
 	} `yaml:"server"`
-	URLs []string `yaml:"urls"`
+	URLs    []string `yaml:"urls"`
+	Workers int
 }
 
 func ReadConfigFile(configPath string) (*Config, error) {
@@ -25,5 +26,6 @@ func ReadConfigFile(configPath string) (*Config, error) {
 	if err := yaml.Unmarshal(file, config); err != nil {
 		return nil, server_errors.ErrDecodeYAML
 	}
+	config.Workers = len(config.URLs)
 	return config, nil
 }

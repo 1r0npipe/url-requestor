@@ -2,9 +2,9 @@ server:
   address: "0.0.0.0"
   port: "8080"
   timeout: 15
-  # logLevel is optional
+  # logLevel is optional (info, debug, error)
   logLevel: debug
 urls:
   - https://raw.githubusercontent.com/assignment132/assignment/main/duckduckgo.json
-  - https://raw.githubusercontent.com/assignment132/assignment/main/duckduckgo.json
-  - https://raw.githubusercontent.com/assignment132/assignment/main/duckduckgo.json
+  - https://raw.githubusercontent.com/assignment132/assignment/main/google.json
+  - https://raw.githubusercontent.com/assignment132/assignment/main/wikipedia.json

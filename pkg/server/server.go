@@ -35,12 +35,12 @@ func (s *RequestServer) Handler() http.Handler {
 	// section for router description
 	router := mux.NewRouter()
 	router.HandleFunc("/healthz", s.HealthCheck).Methods("GET")
-	router.HandleFunc("/request", s.LoggerWrapper(s.HandleRequests)).Methods("POST")
+	router.HandleFunc("/request", s.LoggerWrapper(s.HandleRequests)).Methods("GET")
 	return router
 }
 
 func (s *RequestServer) HandleRequests(w http.ResponseWriter, r *http.Request) {
-	handler.URLRequestsHandler(w, r)
+	handler.URLRequestsHandler(w, r, s.logger, s.config)
 }
 
 func (s *RequestServer) HealthCheck(w http.ResponseWriter, r *http.Request) {
@@ -57,7 +57,7 @@ func (s *RequestServer) Run() error {
 }
 func (s *RequestServer) LoggerWrapper(next http.HandlerFunc) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
-		s.logger.Info().Msgf("request from %s with body: %s", r.RemoteAddr, r.Body)
+		s.logger.Info().Msgf("request from %s as remote address", r.RemoteAddr)
 		next(rw, r)
 	}
 }

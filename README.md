@@ -1,5 +1,21 @@
 # URL requestor
 
+## To run the applicatoin:
+<code>
+<br>git clone https://github.com/1r0npipe/url-requestor
+<br>cd url-requestor
+<br>make run
+</code>
+
+## To run tests
+under maintenance
+
+## The manifest files are at *k8s* folder
+Apply files for available Kubernetes environment (make sure image name is correct, since there is not setup as might change by tag):
+<code>
+kubectl -f apply url-requestor-deployment.yaml
+kubectl -f apply url-requestor-svc.yaml
+</code>
 ## Current status
 1. Server is running
 2. Config file is correctly reading (in YAML format)
@@ -10,9 +26,9 @@
 7. Test event file is ready
 8. Dockerfile is ready and working well
 9. Defined several typical errors
+10. Do the main functionality with all checks and sortings
 
 ## TODO:
 
-1. Finish the handler of requesting and sorting data
-2. Make unit tests
-3. finish README file
+1. Make unit tests
+2. finish README file
