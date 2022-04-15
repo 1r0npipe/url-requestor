@@ -8,10 +8,10 @@ test:
 
 deploy:
 	kubectl apply -f k8s/url-requestor-deployment.yaml
+	kubectl apply -f k8s/url-requestor-svc.yaml
 
 run-mac:
 	env GOOS=darwin go run cmd/main.go
-	kubectl apply -f k8s/url-requestor-svc.yaml
 
 run:
 	go fmt ./...
