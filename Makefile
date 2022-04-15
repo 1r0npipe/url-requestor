@@ -4,7 +4,7 @@ build:
 	env GOOS=linux go build -o bin/url-requestor cmd/main.go
 
 test:
-	go test -coverprofile cp.out ./...
+	go test ./...
 
 deploy:
 	kubectl apply -f k8s/url-requestor-deployment.yaml

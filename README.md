@@ -9,8 +9,9 @@ git clone https://github.com/1r0npipe/url-requestor
 <code>make run
 </code>
 
-## To run tests
-under maintenance
+## To run tests inside of project directory
+<code>make test
+</code>
 
 ## The manifest files are at *k8s* folder
 Apply files for available Kubernetes environment (make sure image name is correct, since there is not setup as might change by tag):<br>
