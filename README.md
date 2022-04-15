@@ -2,9 +2,9 @@
 
 ## To run the applicatoin:
 <code>
-<br>git clone https://github.com/1r0npipe/url-requestor
-<br>cd url-requestor
-<br>make run
+git clone https://github.com/1r0npipe/url-requestor<br />
+cd url-requestor<br />
+make run<br />
 </code>
 
 ## To run tests
@@ -13,8 +13,8 @@ under maintenance
 ## The manifest files are at *k8s* folder
 Apply files for available Kubernetes environment (make sure image name is correct, since there is not setup as might change by tag):
 <code>
-kubectl -f apply url-requestor-deployment.yaml
-kubectl -f apply url-requestor-svc.yaml
+kubectl -f apply url-requestor-deployment.yaml<br />
+kubectl -f apply url-requestor-svc.yaml<br />
 </code>
 ## Current status
 1. Server is running
