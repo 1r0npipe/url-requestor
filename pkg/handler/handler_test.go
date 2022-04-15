@@ -1,14 +1,11 @@
 package handler
 
 import (
-
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
-
-
 )
 
 func TestDummyServer(t *testing.T) {
@@ -30,7 +27,7 @@ func TestDummyServer(t *testing.T) {
 
 	body, _ := ioutil.ReadAll(res.Body)
 
-	if !reflect.DeepEqual(body,testBody) {
+	if !reflect.DeepEqual(body, testBody) {
 		t.Errorf("test failed")
 	}
 

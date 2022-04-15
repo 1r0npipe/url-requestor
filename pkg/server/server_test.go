@@ -1,7 +1,6 @@
 package server
 
 import (
-
 	"net/http"
 	"net/http/httptest"
 	"time"
@@ -13,10 +12,10 @@ import (
 
 func TestRequestServer_HandleRequests(t *testing.T) {
 	req, err := http.NewRequest("GET", "/request?sortKey=views&limit=1", nil)
-    if err != nil {
-        t.Fatal(err)
-    }
-	
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	someMock := &RequestServer{
 		logger: NewLogger("debug"),
 		httpServer: &http.Server{
