@@ -31,8 +31,4 @@ kubectl -f apply url-requestor-svc.yaml
 8. Dockerfile is ready and working well
 9. Defined several typical errors
 10. Do the main functionality with all checks and sortings
-
-## TODO:
-
-1. Make unit tests
-2. finish README file
+11. Some simple unit tests are added, not expecting please full coverage, since not pretty confident with TDD
