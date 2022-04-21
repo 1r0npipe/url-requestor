@@ -43,3 +43,5 @@ kubectl -f apply url-requestor-svc.yaml
 8. Dockerfile is ready and working well
 9. Defined several typical errors
 10. Do the main functionality with all checks and sortings
+11. Implemented re-try option (with no external package)
+12. Checks are added for re-try and in during the run + some degub messages and test URLs added
