@@ -23,6 +23,7 @@ var (
 	LIMIT_MAX        = 200
 	TIMEOUT_REQUEST  = 5
 	LIST_DATA_SIZE   = 1024
+	RETRIES          = 3
 )
 
 func pringHTTPError(w http.ResponseWriter, message string) {
@@ -45,19 +46,30 @@ func checkParams(w http.ResponseWriter, r *http.Request) bool {
 func workerHTTPRequest(w http.ResponseWriter, id int, url string, results chan<- model.BodyGenerated, logger *zerolog.Logger, wg *sync.WaitGroup) {
 	defer wg.Done()
 	var dataArr model.BodyGenerated
+	var (
+		repsErr    error
+		respClient *http.Response
+	)
 	client := http.Client{
 		Timeout: time.Duration(TIMEOUT_REQUEST) * time.Second,
 	}
 	logger.Debug().Msgf("Doing request to URL: %s with worker id: %d", url, id)
-	resp, err := client.Get(url)
-	if err != nil {
+	for RETRIES > 0 {
+		respClient, repsErr = client.Get(url)
+		if repsErr != nil {
+			RETRIES -= 1
+			logger.Debug().Msgf("can't make request to remote side with worker %d to URL: %s", id, url)
+		} else {
+			break
+		}
+	}
+	if respClient == nil {
 		pringHTTPError(w, "can't make request to URL: "+url)
 		logger.Debug().Msgf("can't make request to remote side")
 		return
 	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
+	defer respClient.Body.Close()
+	body, err := ioutil.ReadAll(respClient.Body)
 	if err != nil {
 		pringHTTPError(w, "can't read body from URL: "+url)
 		logger.Debug().Msgf("can't ready body from URL")
@@ -110,9 +122,7 @@ func URLRequestsHandler(w http.ResponseWriter, r *http.Request, logger *zerolog.
 	close(resultsData)
 	listOfResults := make([]model.Data, 0, LIST_DATA_SIZE)
 	for arr := range resultsData {
-		for _, elem := range arr.Data {
-			listOfResults = append(listOfResults, elem)
-		}
+		listOfResults = append(listOfResults, arr.Data...)
 	}
 	sortListResult(listOfResults, sortKey)
 	if limit > len(listOfResults) {

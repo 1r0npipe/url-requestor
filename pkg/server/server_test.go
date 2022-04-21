@@ -24,7 +24,12 @@ func TestRequestServer_HandleRequests(t *testing.T) {
 			ReadTimeout:  time.Duration(15) * time.Second,
 			WriteTimeout: time.Duration(15) * time.Second,
 		},
-		config: &config.Config{},
+		config: &config.Config{
+			URLs: []string{"https://raw.githubusercontent.com/assignment132/assignment/main/duckduckgo.json",
+				"https://raw.githubusercontent.com/assignment132/assignment/main/google.json",
+				"https://raw.githubusercontent.com/assignment132/assignment/main/wikipedia.json"},
+			Workers: 3,
+		},
 	}
 	rr := httptest.NewRecorder()
 	handler := http.HandlerFunc(someMock.HandleRequests)
